@@ -1,0 +1,13 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+
+# Results
+Resultados_TXT/
+Resultados_PDF/
+Resultados_HTML/
+
+# Neuron
+x86_64/
