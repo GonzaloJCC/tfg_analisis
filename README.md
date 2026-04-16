@@ -68,20 +68,17 @@ Cada modulo se ejecuta de forma independiente desde su directorio correspondient
 ### Simulaciones con Neun
 
 ```bash
-cd Neun
-python linsker.py
+python3 Neun_simulacion/linsker.py
 ```
 
 ### Simulaciones con NEURON
 
 ```bash
-cd Neuron
-python linsker.py
+python3 Neuron_simulacion/linsker.py
 ```
 
 ### Comparacion entre simuladores
 
 ```bash
-cd Comparacion
-python linsker.py
+python3 Comparacion/linsker.py
 ```
