@@ -74,7 +74,13 @@ python3 Neun_simulacion/linsker.py
 
 - STDP
 ```bash
-python3 Neun_simulacion/STDP/stdp.py
+# Para simulación larga
+python3 Neun_simulacion/stdp_v_g.py
+```
+
+```bash
+# Para simulación corta
+python3 Neun_simulacion/stdp_i_g.py
 ```
 
 ### Simulaciones con NEURON
