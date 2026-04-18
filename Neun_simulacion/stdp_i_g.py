@@ -116,7 +116,7 @@ if os.path.exists(full_txt_path):
     columns = ['Time', 'vpre1', 'vpre2', 'vpost', 'i1', 'i2', 'g1', 'g2']
     df = pd.read_csv(full_txt_path, sep=r'\s+', names=columns, header=0, engine='c')
 
-    # Downsample for continuous plots (Change ::1 to ::10 or ::50 if you want less RAM usage)
+    # Downsample for continuous plots (Change ::1 to ::10 or ::50)
     df_plot = df.iloc[::1, :].copy()
 
     # Generate PDF ------------------------------------------------------------------------------------------------

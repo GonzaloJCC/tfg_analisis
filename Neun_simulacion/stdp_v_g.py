@@ -26,7 +26,7 @@ plt.rcParams.update({
 TXT_FOLDER = "Resultados_TXT"
 PNG_FOLDER = "Resultados_PDF"
 BOKEH_FOLDER = "Resultados_HTML"
-FILE_NAME = "Prueba_01"
+FILE_NAME = "STDP_Prueba"
 
 # Get parameters from C++
 def extract_cpp_params():
