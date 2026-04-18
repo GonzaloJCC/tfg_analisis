@@ -4,8 +4,8 @@
 
 Este repositorio contiene los scripts de simulacion y analisis desarrollados como parte del Trabajo de Fin de Grado. Su proposito es validar el correcto funcionamiento de dos modelos de plasticidad sinaptica implementados:
 
-- **Modelo de Linsker** (1986): basado en reglas de aprendizaje hebbiano con correlacion de actividad.
-- **Modelo de STDP** (Spike-Timing-Dependent Plasticity, 2001): basado en la dependencia temporal de los potenciales de accion pre y postsinapticos.
+- **Modelo de Linsker** (1986)
+- **Modelo de STDP** (Spike-Timing-Dependent Plasticity, 2000)
 
 Las simulaciones se ejecutan sobre dos simuladores neuronales distintos, Neun y NEURON, y se incluyen herramientas para la comparacion cruzada de resultados entre ambos.
 
@@ -98,5 +98,5 @@ make -C Neuron_simulacion/STDP all2
 ### Comparacion entre simuladores
 
 ```bash
-python3 Comparacion/linsker.py
+python3 Comparacion/stdp_comparacion.py
 ```
