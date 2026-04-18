@@ -67,14 +67,32 @@ Cada modulo se ejecuta de forma independiente desde su directorio correspondient
 
 ### Simulaciones con Neun
 
+- Linsker
 ```bash
 python3 Neun_simulacion/linsker.py
 ```
 
+- STDP
+```bash
+python3 Neun_simulacion/STDP/stdp.py
+```
+
 ### Simulaciones con NEURON
 
+- Linsker
 ```bash
-python3 Neuron_simulacion/linsker.py
+make -C Neuron_simulacion/Linsker all
+```
+
+- STDP
+```bash
+# Para simulación larga
+make -C Neuron_simulacion/STDP all1
+```
+
+```bash
+# Para simulación corta
+make -C Neuron_simulacion/STDP all2
 ```
 
 ### Comparacion entre simuladores
