@@ -9,6 +9,9 @@ Este repositorio contiene los scripts de simulacion y analisis desarrollados com
 
 Las simulaciones se ejecutan sobre dos simuladores neuronales distintos, Neun y NEURON, y se incluyen herramientas para la comparacion cruzada de resultados entre ambos.
 
+> **IMPORTANTE - REGLA DE EJECUCIÓN:** Para que las rutas de los archivos funcionen correctamente, **todos los comandos** (clonación, compilación y simulaciones) deben ejecutarse siempre estando ubicados en la carpeta raíz de este repositorio (`analisis`).
+
+
 ## Requisitos previos
 
 ### Software necesario
@@ -29,19 +32,25 @@ pip install -r requirements.txt
 
 ## Configuracion del simulador Neun
 
-Para ejecutar cualquier script que no pertenezca a la carpeta `Neuron`, es imprescindible disponer del simulador Neun compilado. El repositorio de Neun debe clonarse **al mismo nivel de directorio** que este proyecto, es decir, como un directorio hermano:
+Para ejecutar cualquier script que no pertenezca a la carpeta `Neuron`, es imprescindible disponer del simulador Neun compilado. El repositorio de Neun debe clonarse **al mismo nivel de directorio** que este proyecto, es decir, como un directorio hermano.
+
 
 ```bash
+cd ..
 git clone git@github.com:GonzaloJCC/Neun.git
+cd analisis
 ```
 
 Una vez clonado, compilar el proyecto:
 
 ```bash
-cd Neun
+cd ../Neun
 mkdir build && cd build
 cmake ..
 make
+
+# Vuelve al directorio de análisis para continuar:
+cd ../../analisis
 ```
 
 ## Estructura del proyecto
@@ -50,8 +59,8 @@ El repositorio esta organizado en tres modulos, cada uno orientado a un aspecto 
 
 ```
 .
-├── Neun/           # Simulaciones ejecutadas sobre el simulador Neun
-├── Neuron/         # Simulaciones ejecutadas sobre el simulador NEURON
+├── Neun_simulacion/           # Simulaciones ejecutadas sobre el simulador Neun
+├── Neuron_simulacion/         # Simulaciones ejecutadas sobre el simulador NEURON
 ├── Comparacion/    # Analisis comparativo entre ambos simuladores
 ├── README.md
 └── requirements.txt
@@ -102,6 +111,8 @@ make -C Neuron_simulacion/STDP all2
 ```
 
 ### Comparacion entre simuladores
+
+- Es funamental ejecutar primero la simulación STDP con NEURON (cualquiera de las 2), ya que esta genera los archivos necesarios para la comparacion.
 
 ```bash
 python3 Comparacion/stdp_comparacion.py
