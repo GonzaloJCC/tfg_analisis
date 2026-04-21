@@ -154,7 +154,7 @@ print("\n--- Generando Gráficas ---")
 
 # --- PDF ---
 fig, axs = plt.subplots(4, 1, figsize=(8, 11), sharex=True)
-fig.suptitle(f"Comparación Sinapsis 1: NEUN vs NEURON", fontsize=12)
+# fig.suptitle(f"Comparación Sinapsis 1: NEUN vs NEURON", fontsize=12)
 
 # Panel 1: Voltajes NEUN
 axs[0].plot(df_neun['Time'], df_neun['vpre1'], label='V_pre1', color='red', alpha=0.8)

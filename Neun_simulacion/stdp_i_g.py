@@ -27,7 +27,7 @@ TXT_FOLDER = "Resultados_TXT"
 PNG_FOLDER = "Resultados_PDF"
 BOKEH_FOLDER = "Resultados_HTML"
 
-FILE_NAME = "STDP_10s"
+FILE_NAME = "STDP_i_g"
 
 # Get parameters from C++
 def extract_cpp_params():
@@ -124,7 +124,7 @@ if os.path.exists(full_txt_path):
 
     # Title of the plot
     plot_title_str = ", ".join(title_parts)
-    fig.suptitle(f"STDP Simulation: {plot_title_str}")
+    # fig.suptitle(f"STDP Simulation: {plot_title_str}")
 
     # Plot 1: Current
     ax_i.plot(df_plot['Time'], df_plot['i1'], label='i1', color='red')

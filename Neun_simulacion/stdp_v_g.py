@@ -26,7 +26,7 @@ plt.rcParams.update({
 TXT_FOLDER = "Resultados_TXT"
 PNG_FOLDER = "Resultados_PDF"
 BOKEH_FOLDER = "Resultados_HTML"
-FILE_NAME = "STDP_Prueba"
+FILE_NAME = "STDP_v_g"
 
 # Get parameters from C++
 def extract_cpp_params():
@@ -117,9 +117,6 @@ if os.path.exists(full_txt_path):
 
     # Generate pdf ------------------------------------------------------------------------------------------------------------
     fig, axs = plt.subplots(4, 1, figsize=(8, 10), sharex=True)
-
-    plot_title_str = "Verificación funcionamiento"
-    fig.suptitle(f"Verificación STDP: {plot_title_str}")
 
     threshold_val = float(params.get('spike_threshold', -54.0))
 

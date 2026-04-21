@@ -20,7 +20,7 @@ TXT_FOLDER = "Resultados_TXT"
 PNG_FOLDER = "Resultados_PDF"
 BOKEH_FOLDER = "Resultados_HTML"
 
-# Set LaTeX parameters (Dejamos el usetex a True como tenías en este repo)
+# Set LaTeX parameters
 plt.rcParams.update({
     "text.usetex": True,
     "font.family": "serif",
@@ -37,7 +37,7 @@ def extract_cpp_params():
     print("--- Analyzing C++ code to find parameters ---")
     script_dir = os.path.dirname(os.path.abspath(__file__))
     cpp_file = os.path.abspath(os.path.join(script_dir, '../../Neun/examples/linskerSynapse.cpp'))
-    
+
     if not os.path.exists(cpp_file):
         print(f"Error: Not found {cpp_file}")
         sys.exit(1)
@@ -50,7 +50,7 @@ def extract_cpp_params():
     # Search for patterns like: syn_args.params[Synapsis::xo] = -65;
     pattern = r"syn_args\.params\[Synapsis::(\w+)\]\s*=\s*([^;]+);"
     matches = re.findall(pattern, content)
-    
+
     for name, value in matches:
         params_found[name] = value.strip()
 
@@ -114,10 +114,10 @@ run_model(full_txt_path)
 # Plot
 if os.path.exists(full_txt_path):
     print("Generating PDF...")
-    
+
     # For 2 synapses
     columns = ['Time', 'V1pre', 'V2pre', 'Vpost', 'i1', 'i2', 'w1', 'w2', 'SUM(W)']
-    
+
     # For 4 synapses
     # columns = ['Time', 'V1pre', 'V2pre', 'V3pre', 'V4pre', 'Vpost', 'i1', 'i2', 'i3', 'i4', 'w1', 'w2', 'w3', 'w4', 'SUM(W)']
 
@@ -129,7 +129,7 @@ if os.path.exists(full_txt_path):
 
     # Title of the plot
     plot_title_str = ", ".join(title_parts)
-    fig.suptitle(f"Linsker Model: {plot_title_str}")
+    # fig.suptitle(f"Linsker Model: {plot_title_str}")
 
     # Plots - Panel 1
     ax_i.plot(df_plot['Time'], df_plot['i1'], label='i1', color='red')
@@ -148,7 +148,7 @@ if os.path.exists(full_txt_path):
 
     # ax_w.plot(df_plot['Time'], df_plot['w3'], label='w3', color='green')
     # ax_w.plot(df_plot['Time'], df_plot['w4'], label='w4', color='blue')
-    
+
     ax_w.set_ylabel(r'Pesos ($w$)')
     ax_w.set_xlabel(r'Tiempo ($ms$)')
     ax_w.legend(loc='upper right')
@@ -163,10 +163,10 @@ if os.path.exists(full_txt_path):
     # Save plot
     png_dir_abs = os.path.join(script_dir, PNG_FOLDER)
     os.makedirs(png_dir_abs, exist_ok=True)
-    
+
     png_path = os.path.join(png_dir_abs, f"{base_filename}.pdf")
     plt.savefig(png_path)
-    
+
     # Generate HTML
     print("Generating HTML...")
     bokeh_dir_abs = os.path.join(script_dir, BOKEH_FOLDER)
@@ -179,7 +179,7 @@ if os.path.exists(full_txt_path):
 
     # Set x_range dynamically based on HABILITAR_ZOOM
     fig_kws = {
-        "title": f"Linsker Currents - {plot_title_str}", 
+        # "title": f"Linsker Currents - {plot_title_str}", 
         "width": 900, 
         "height": 250, 
         "tools": TOOLS, 
@@ -197,7 +197,7 @@ if os.path.exists(full_txt_path):
     p1.legend.click_policy = "hide"
 
     # P2: Weights (Synchronized with P1 x_range)
-    p2 = figure(title="Linsker Weights", width=900, height=250, tools=TOOLS, x_range=p1.x_range, output_backend="webgl")
+    p2 = figure(width=900, height=250, tools=TOOLS, x_range=p1.x_range, output_backend="webgl")
     p2.line(df_plot['Time'], df_plot['w1'], legend_label="w1", color="brown", line_width=2)
     p2.line(df_plot['Time'], df_plot['w2'], legend_label="w2", color="darkgreen", line_width=2)
     p2.xaxis.axis_label = "Tiempo (ms)"
