@@ -130,18 +130,16 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 print("Generando PDF...")
 fig, axs = plt.subplots(2, 1, figsize=(6, 5), sharex=True)  
 
-# Plot Pesos
-axs[0].plot(t_np, w1_np, label=r'$w_1$', color='red')
-axs[0].plot(t_np, w2_np, label=r'$w_2$', color='blue')
-axs[0].set_ylabel(r'Eficacia Sináptica ($\mu S$)') # uS
+axs[0].plot(t_np, i1_np, label=r'$i_1$', color='red')
+axs[0].plot(t_np, i2_np, label=r'$i_2$', color='blue')
+label_corriente = r'Corriente ($nA$)' if PA_FLAG == 1 else r'Corriente ($pA$)'
+axs[0].set_ylabel(label_corriente) 
 axs[0].legend(loc='upper right')
 axs[0].grid(True, alpha=0.3)
 
-# Plot Corriente
-axs[1].plot(t_np, i1_np, label=r'$i_1$', color='red')
-axs[1].plot(t_np, i2_np, label=r'$i_2$', color='blue')
-label_corriente = r'Corriente ($nA$)' if PA_FLAG == 1 else r'Corriente ($pA$)'
-axs[1].set_ylabel(label_corriente) 
+axs[1].plot(t_np, w1_np, label=r'$w_1$', color='red')
+axs[1].plot(t_np, w2_np, label=r'$w_2$', color='blue')
+axs[1].set_ylabel(r'Pesos ($w$)')
 axs[1].set_xlabel(r'Tiempo ($ms$)')
 axs[1].legend(loc='upper right')
 axs[1].grid(True, alpha=0.3)
@@ -172,22 +170,19 @@ fig_kws = {"title": f"Resultados Linsker - {FILE_NAME}", "width": 900, "height":
 if HABILITAR_ZOOM:
     fig_kws["x_range"] = (ZOOM_INICIO, ZOOM_FIN)
 
-# P1: Pesos
 p1 = figure(**fig_kws)
-p1.line(t_np, w1_np, legend_label="w1", color="red", line_width=1.5)
-p1.line(t_np, w2_np, legend_label="w2", color="blue", line_width=1.5)
-p1.yaxis.axis_label = "Eficacia (uS)"
+p1.line(t_np, i1_np, legend_label="i1", color="red", line_width=2)
+p1.line(t_np, i2_np, legend_label="i2", color="blue", line_width=2)
+p1.yaxis.axis_label = "Corriente (nA)" if PA_FLAG == 1 else "Corriente (pA)"
 p1.legend.click_policy = "hide"
 
-# P2: Corrientes (Sincronizada con el eje X de P1)
 p2 = figure(width=900, height=250, tools=TOOLS, x_range=p1.x_range, output_backend="webgl")
-p2.line(t_np, i1_np, legend_label="i1", color="red", line_width=2)
-p2.line(t_np, i2_np, legend_label="i2", color="blue", line_width=2)
+p2.line(t_np, w1_np, legend_label="w1", color="red", line_width=1.5)
+p2.line(t_np, w2_np, legend_label="w2", color="blue", line_width=1.5)
 p2.xaxis.axis_label = "Tiempo (ms)"
-p2.yaxis.axis_label = "Corriente (nA)" if PA_FLAG == 1 else "Corriente (pA)"
+p2.yaxis.axis_label = "Pesos (w)"
 p2.legend.click_policy = "hide"
 
-# Agrupar y guardar
 layout = column(p1, p2)
 save(layout)
 
