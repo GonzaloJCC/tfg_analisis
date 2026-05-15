@@ -181,7 +181,7 @@ print("--- Generando figura 2x2 (PDF) ---")
 fig, axs = plt.subplots(2, 2, figsize=(10, 6), sharex='col')
 
 # --- COLUMNA 1: NEUN ---
-axs[0, 0].set_title(r'\textbf{Plasticidad de Linsker en Neun (Implementada)}', fontsize=12, fontweight='bold', fontfamily='serif')
+axs[0, 0].set_title(r'Plasticidad de Linsker en Neun (Implementada)', fontsize=12, fontfamily='serif')
 axs[0, 0].plot(df_plot['Time'], df_plot['V1pre'], label=r'$V_{\mathrm{pre1}}$', color='red', alpha=0.8)
 axs[0, 0].plot(df_plot['Time'], df_plot['V2pre'], label=r'$V_{\mathrm{pre2}}$', color='green', alpha=0.8)
 axs[0, 0].plot(df_plot['Time'], df_plot['Vpost'], label=r'$V_{\mathrm{post}}$', color='blue', alpha=0.8)
@@ -197,7 +197,7 @@ axs[1, 0].legend(loc='upper right')
 axs[1, 0].grid(True, alpha=0.3)
 
 # --- COLUMNA 2: NEURON ---
-axs[0, 1].set_title(r'\textbf{Plasticidad de Linsker en NEURON (Validación)}', fontsize=12, fontweight='bold', fontfamily='serif')
+axs[0, 1].set_title(r'Plasticidad de Linsker en NEURON (Validación)', fontsize=12, fontfamily='serif')
 axs[0, 1].plot(t_np, vpre1_np, label=r'$V_{\mathrm{pre1}}$', color='red', alpha=0.8)
 axs[0, 1].plot(t_np, vpre2_np, label=r'$V_{\mathrm{pre2}}$', color='green', alpha=0.8)
 axs[0, 1].plot(t_np, vpost_np, label=r'$V_{\mathrm{post}}$', color='blue', alpha=0.8)
@@ -237,8 +237,8 @@ TOOLS = "pan,wheel_zoom,box_zoom,reset,save,crosshair"
 W, H = 500, 300
 
 # Lógica del zoom para Bokeh
-kwargs_neun = {"title": "Plasticidad de Linsker en Neun (Implementada)", "width": W, "height": H, "tools": TOOLS, "output_backend": "webgl"}
-kwargs_neuron = {"title": "Plasticidad de Linsker en NEURON (Validación)", "width": W, "height": H, "tools": TOOLS, "output_backend": "webgl"}
+kwargs_neun = {"title": "Plasticidad de Linsker en Neun (Implementada)", "width": W, "height": H, "tools": TOOLS}
+kwargs_neuron = {"title": "Plasticidad de Linsker en NEURON (Validación)", "width": W, "height": H, "tools": TOOLS}
 
 if HABILITAR_ZOOM:
     kwargs_neun["x_range"] = (ZOOM_INICIO, ZOOM_FIN)
@@ -252,7 +252,7 @@ p_neun_v.line(df_plot['Time'], df_plot['Vpost'], legend_label="V_post", color="b
 p_neun_v.yaxis.axis_label = "Voltaje (mV)"
 
 # 2. Neun Abajo (Pesos)
-p_neun_w = figure(width=W, height=H, tools=TOOLS, x_range=p_neun_v.x_range, output_backend="webgl")
+p_neun_w = figure(width=W, height=H, tools=TOOLS, x_range=p_neun_v.x_range)
 p_neun_w.line(df_plot['Time'], df_plot['w1'], legend_label="w1", color="darkred", line_width=2)
 p_neun_w.line(df_plot['Time'], df_plot['w2'], legend_label="w2", color="darkgreen", line_width=2)
 p_neun_w.xaxis.axis_label = "Tiempo (ms)"
@@ -266,7 +266,7 @@ p_neuron_v.line(t_np, vpost_np, legend_label="V_post", color="blue", line_width=
 p_neuron_v.yaxis.axis_label = "Voltaje (mV)"
 
 # 4. NEURON Abajo (Pesos)
-p_neuron_w = figure(width=W, height=H, tools=TOOLS, x_range=p_neuron_v.x_range, output_backend="webgl")
+p_neuron_w = figure(width=W, height=H, tools=TOOLS, x_range=p_neuron_v.x_range)
 p_neuron_w.line(t_np, w1_np, legend_label="w1", color="darkred", line_width=2)
 p_neuron_w.line(t_np, w2_np, legend_label="w2", color="darkgreen", line_width=2)
 p_neuron_w.xaxis.axis_label = "Tiempo (ms)"
@@ -278,7 +278,6 @@ for p in [p_neun_v, p_neun_w, p_neuron_v, p_neuron_w]:
     if p.title:
         p.title.text_font = "serif"
         p.title.text_font_size = "13pt"
-        p.title.text_font_style = "bold"
 
 # Crear grid (Matriz de 2x2)
 layout = gridplot([[p_neun_v, p_neuron_v], [p_neun_w, p_neuron_w]])
