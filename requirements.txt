@@ -3,3 +3,4 @@ pandas
 bokeh
 neuron
 numpy
+nest-simulator

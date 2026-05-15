@@ -61,14 +61,16 @@ El repositorio esta organizado en tres modulos, cada uno orientado a un aspecto 
 .
 ├── Neun_simulacion/           # Simulaciones ejecutadas sobre el simulador Neun
 ├── Neuron_simulacion/         # Simulaciones ejecutadas sobre el simulador NEURON
-├── Comparacion/    # Analisis comparativo entre ambos simuladores
+├── NEST_simulacion/           # Simulaciones ejecutadas sobre el simulador NEST
+├── Comparacion/               # Analisis comparativo entre los simuladores
 ├── README.md
 └── requirements.txt
 ```
 
 - **Neun**: scripts para la ejecucion de los modelos de plasticidad sinaptica utilizando el simulador Neun como backend.
 - **Neuron**: scripts para la ejecucion de los mismos modelos utilizando el simulador NEURON.
-- **Comparacion**: scripts para el contraste y validacion cruzada de los resultados obtenidos con ambos simuladores.
+- **NEST**: scripts para la ejecucion de los mismos modelos utilizando el simulador NEST.
+- **Comparacion**: scripts para el contraste y validacion cruzada de los resultados obtenidos con los simuladores.
 
 ## Ejecucion
 
@@ -110,10 +112,22 @@ make -C Neuron_simulacion/STDP all1
 make -C Neuron_simulacion/STDP all2
 ```
 
+### Simulaciones con NEST
+```bash
+python3 Nest_simulacion/stdp_nest.py
+```
+
+
+
 ### Comparacion entre simuladores
 
-- Es funamental ejecutar primero la simulación STDP con NEURON (cualquiera de las 2), ya que esta genera los archivos necesarios para la comparacion.
+- Es funamental ejecutar primero la simulación STDP o Linsker con NEURON (cualquiera de las 2), ya que esta genera los archivos necesarios para la comparacion.
 
 ```bash
-python3 Comparacion/stdp_comparacion.py
+python3 Comparacion/stdp_comparacionNeun_NEURON.py
 ```
+
+```bash
+python3 Comparacion/linsker_comparacionNeun_NEURON.py
+```
+
